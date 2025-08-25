@@ -1,19 +1,19 @@
 import React,{useState,useImperativeHandle} from 'react';
-import styles from './Calendar.module.css';
+import styles from './mini-Calendar.module.css';
 // import { useControllableValue } from 'ahooks';
 
-interface CalendarProps {
+interface MiniCalendarProps {
   defaultValue?: Date;
   onChange?: (date: Date) => void;
-  ref?: React.Ref<CalendarRef>;
+  ref?: React.Ref<MiniCalendarRef>;
 }
 
-export interface CalendarRef {
+export interface MiniCalendarRef {
   getDate: () => Date;
   setDate:(date: Date) => void;
 }
 
-const Calendar = (props:CalendarProps) => {
+const MiniCalendar = (props:MiniCalendarProps) => {
   const {defaultValue = new Date(),onChange,ref} = props
   //非受控模式
   const [date,setdate] = useState(defaultValue);
@@ -86,4 +86,4 @@ const Calendar = (props:CalendarProps) => {
   );
 }
 
-export default Calendar;
+export default MiniCalendar;
