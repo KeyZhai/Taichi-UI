@@ -1,10 +1,10 @@
 // import MiniCalendar, { type MiniCalendarRef } from "./components/mini-Calendar"
-// import { useRef, useState } from "react"
+import { useState } from "react"
 import Calendar from "./components/Calendar"
 import dayjs from "dayjs"
 function App() {  
   // const calendarRef = useRef<MiniCalendarRef>(null);
-  // const [state,setState] = useState(new Date());
+  const [state,setState] = useState(dayjs('2025-8-26'));
   return (
     <div>
       {/* 非受控组件 */}
@@ -16,7 +16,13 @@ function App() {
         setState(date);
         alert("选中的日期为" + date)
       }}/> */}
-      <Calendar value={dayjs('2025-08-25')} />
+      <Calendar value={state} dateInnerContent={(value) => {
+        return <div>
+          <p style={{background: 'yellowgreen', height: '30px'}}>{value.format('YYYY/MM/DD')}</p>
+        </div>
+      }} onChange={(date) => {
+        setState(date)
+      }}></Calendar>
     </div>
   )
 }
