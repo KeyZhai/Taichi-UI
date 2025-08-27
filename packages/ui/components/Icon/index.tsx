@@ -8,7 +8,7 @@ import type {
 import cs from 'classnames'
 import styles from './style/Icon.module.scss'
 export { createIcon } from './createIcon'
-export { createFrontIconFont } from './createFrontIconFont'
+export { createFrontIconFont } from './createFrontIconfont'
 
 type BaseIconProps = {
   className?: string
