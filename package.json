@@ -1,36 +1,34 @@
 {
-  "name": "taichi_ui",
+  "name": "taichi-ui-monorepo",
   "private": true,
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "tsc -b && vite build",
-    "lint": "eslint .",
-    "preview": "vite preview"
+    "dev:ui": "pnpm --filter @taichi-ui/components dev",
+    "dev:playground": "pnpm --filter playground dev",
+    "dev:storybook": "pnpm --filter storybook storybook",
+    "build:ui": "pnpm --filter @taichi-ui/components build",
+    "build:playground": "pnpm --filter playground build",
+    "build:storybook": "pnpm --filter storybook build-storybook",
+    "build:all": "pnpm -r build",
+    "lint": "pnpm -r lint",
+    "lint:fix": "pnpm -r lint:fix",
+    "format": "prettier --write .",
+    "preview:playground": "pnpm --filter playground preview",
+    "clean": "pnpm -r clean",
+    "prepare": "husky"
   },
-  "dependencies": {
-    "ahooks": "^3.9.4",
-    "classnames": "^2.5.1",
-    "dayjs": "^1.11.13",
-    "react": "^19.1.1",
-    "react-dom": "^19.1.1",
-    "sass": "^1.90.0"
+  "lint-staged": {
+    "**/*.{js,jsx,ts,tsx,json,css,scss,md}": [
+      "prettier --write"
+    ]
   },
   "devDependencies": {
-    "@eslint/js": "^9.33.0",
-    "@types/react": "^19.1.10",
-    "@types/react-dom": "^19.1.7",
-    "@vitejs/plugin-react": "^5.0.0",
-    "eslint": "^9.33.0",
-    "eslint-config-prettier": "^10.1.8",
-    "eslint-plugin-prettier": "^5.5.4",
-    "eslint-plugin-react-hooks": "^5.2.0",
-    "eslint-plugin-react-refresh": "^0.4.20",
-    "globals": "^16.3.0",
+    "@commitlint/cli": "^19.8.1",
+    "@commitlint/config-conventional": "^19.8.1",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.1.5",
     "prettier": "^3.6.2",
-    "typescript": "~5.8.3",
-    "typescript-eslint": "^8.39.1",
-    "vite": "^7.1.2"
+    "typescript": "~5.8.3"
   }
 }
