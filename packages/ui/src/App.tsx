@@ -2,6 +2,7 @@ import { Icon } from '../components/index'
 import { Space } from '../components/index'
 import { ConfigProvider } from '../components/Space/ConfigProvider'
 import { Portal } from '../components'
+import { CopyToClipboard } from '../components/index'
 
 function App() {
   return (
@@ -28,6 +29,15 @@ function App() {
       </div>
       <h2>Portal</h2>
       <Portal attach={document.body}>123</Portal>
+      <h2>CopyToClipboard</h2>
+      <CopyToClipboard
+        text="Hello, World!"
+        onCopy={(text, result) => {
+          console.log(`Copied: ${text}, Result: ${result}`)
+        }}
+      >
+        <button>Copy Text</button>
+      </CopyToClipboard>
     </div>
   )
 }
