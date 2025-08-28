@@ -22,7 +22,7 @@ export interface CalendarProps {
   locale?: string
 }
 
-const Calendar = (props: CalendarProps) => {
+export const Calendar = (props: CalendarProps) => {
   const { style, className, locale, onChange } = props
   const classNames = classnames('calendar', className)
   //区分受控模式和非受控模式
@@ -73,5 +73,3 @@ const Calendar = (props: CalendarProps) => {
     </LocaleContext.Provider>
   )
 }
-
-export default Calendar

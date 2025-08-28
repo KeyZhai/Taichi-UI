@@ -13,7 +13,7 @@ export interface MiniCalendarRef {
   setDate: (date: Date) => void
 }
 
-const MiniCalendar = (props: MiniCalendarProps) => {
+export const MiniCalendar = (props: MiniCalendarProps) => {
   const { defaultValue = new Date(), onChange, ref } = props
   //非受控模式
   const [date, setdate] = useState(defaultValue)
@@ -116,5 +116,3 @@ const MiniCalendar = (props: MiniCalendarProps) => {
     </div>
   )
 }
-
-export default MiniCalendar
