@@ -24,10 +24,13 @@
   },
   "dependencies": {
     "@types/classnames": "^2.3.4",
+    "@types/react-lazyload": "^3.2.3",
     "ahooks": "^3.9.4",
     "classnames": "^2.5.1",
     "copy-to-clipboard": "^3.3.3",
-    "dayjs": "^1.11.13"
+    "dayjs": "^1.11.13",
+    "prop-types": "^15.8.1",
+    "react-lazyload": "^3.2.1"
   },
   "peerDependencies": {
     "react": "^19.1.1",
