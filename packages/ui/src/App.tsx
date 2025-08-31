@@ -3,6 +3,7 @@ import { Space } from '../components/index'
 import { ConfigProvider } from '../components/Space/ConfigProvider'
 import { Portal } from '../components'
 import { CopyToClipboard } from '../components/index'
+import { Watermark } from '../components/index'
 
 function App() {
   return (
@@ -38,6 +39,60 @@ function App() {
       >
         <button>Copy Text</button>
       </CopyToClipboard>
+      <h2>Watermark</h2>
+      <Watermark
+        content={['测试水印', '神说要有光']}
+        gap={[0, 0]}
+        offset={[50, 100]}
+        fontStyle={{
+          color: 'green',
+        }}
+      >
+        <div style={{ height: 800 }}>
+          <p>
+            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quos quod
+            deserunt quidem quas in rem ipsam ut nesciunt asperiores dignissimos
+            recusandae minus, eaque, harum exercitationem esse sapiente?
+            Eveniet, id provident!
+          </p>
+          <p>
+            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quos quod
+            deserunt quidem quas in rem ipsam ut nesciunt asperiores dignissimos
+            recusandae minus, eaque, harum exercitationem esse sapiente?
+            Eveniet, id provident!
+          </p>
+          <p>
+            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quos quod
+            deserunt quidem quas in rem ipsam ut nesciunt asperiores dignissimos
+            recusandae minus, eaque, harum exercitationem esse sapiente?
+            Eveniet, id provident!
+          </p>
+          <p>
+            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quos quod
+            deserunt quidem quas in rem ipsam ut nesciunt asperiores dignissimos
+            recusandae minus, eaque, harum exercitationem esse sapiente?
+            Eveniet, id provident!
+          </p>
+          <p>
+            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quos quod
+            deserunt quidem quas in rem ipsam ut nesciunt asperiores dignissimos
+            recusandae minus, eaque, harum exercitationem esse sapiente?
+            Eveniet, id provident!
+          </p>
+          <p>
+            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quos quod
+            deserunt quidem quas in rem ipsam ut nesciunt asperiores dignissimos
+            recusandae minus, eaque, harum exercitationem esse sapiente?
+            Eveniet, id provident!
+          </p>
+          <p>
+            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quos quod
+            deserunt quidem quas in rem ipsam ut nesciunt asperiores dignissimos
+            recusandae minus, eaque, harum exercitationem esse sapiente?
+            Eveniet, id provident!
+          </p>
+        </div>
+      </Watermark>
     </div>
   )
 }
