@@ -51,6 +51,7 @@ export const Watermark: FC<WatermarkProps> = (props) => {
   const getContainer = useCallback(() => {
     return props.getContainer ? props.getContainer() : containerRef.current!
   }, [props.getContainer, containerRef.current])
+
   const { generateWatermark } = useWaterMark({
     zIndex,
     width,
@@ -63,6 +64,7 @@ export const Watermark: FC<WatermarkProps> = (props) => {
     offset,
     getContainer,
   })
+
   useEffect(() => {
     generateWatermark({
       zIndex,

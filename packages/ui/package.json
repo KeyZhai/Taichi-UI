@@ -29,6 +29,7 @@
     "classnames": "^2.5.1",
     "copy-to-clipboard": "^3.3.3",
     "dayjs": "^1.11.13",
+    "js-cookie": "^3.0.5",
     "lodash-es": "^4.17.21",
     "prop-types": "^15.8.1",
     "react-lazyload": "^3.2.1"
