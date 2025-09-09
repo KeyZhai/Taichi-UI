@@ -36,9 +36,34 @@ export const useStore = (defaultPosition: Position) => {
         }
       })
     },
-    update(id: number, message: MessageProps) {},
-    remove(id: number) {},
-    clearAll() {},
+    update(id: number, message: MessageProps) {
+      if (!id) return
+      setMessageList((prevState) => {
+        const nextState = { ...prevState }
+        const { position, index } = findMessage(nextState, id)
+        if (position && index !== -1) {
+          nextState[position][index] = {
+            ...nextState[position][index],
+            ...message,
+          }
+        }
+        return nextState
+      })
+    },
+    remove(id: number) {
+      if (!id) return
+      setMessageList((prevState) => {
+        const position = getMessagePosition(prevState, id)
+        if (!position) return prevState
+        return {
+          ...prevState,
+          [position]: prevState[position].filter((item) => item.id !== id),
+        }
+      })
+    },
+    clearAll() {
+      setMessageList({ ...initialState })
+    },
   }
 }
 
@@ -55,4 +80,15 @@ const getMessagePosition = (messageList: MessageList, id: number) => {
     messageList[key as Position].some((item) => item.id === id),
   )
   return position
+}
+
+const findMessage = (
+  messageList: MessageList,
+  id: number,
+): { position?: Position; index: number } => {
+  const position = getMessagePosition(messageList, id) as Position | undefined
+  const index = position
+    ? messageList[position].findIndex((item) => item.id === id)
+    : -1
+  return { position, index }
 }

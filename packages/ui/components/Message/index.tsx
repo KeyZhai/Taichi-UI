@@ -1,5 +1,5 @@
 import type { CSSProperties, FC, ReactNode } from 'react'
-
+import { useStore } from './useStore'
 export type Position = 'top' | 'bottom'
 
 export interface MessageProps {
@@ -12,5 +12,21 @@ export interface MessageProps {
 }
 
 export const MessageProvider: FC<{}> = (props) => {
-  return <div></div>
+  const { messageList, add, update, remove, clearAll } = useStore('top')
+  return (
+    <div>
+      {messageList.top.map((item) => (
+        <div
+          style={{
+            width: 100,
+            lineHeight: '30px',
+            border: '1px solid #000',
+            margin: '20px',
+          }}
+        >
+          {item.content}
+        </div>
+      ))}
+    </div>
+  )
 }
