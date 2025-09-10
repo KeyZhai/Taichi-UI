@@ -1,5 +1,10 @@
-import type { CSSProperties, FC, ReactNode } from 'react'
-import { useStore } from './useStore'
+import { createPortal } from 'react-dom'
+import type { CSSProperties, FC, ReactNode, Ref } from 'react'
+import { useMemo, useImperativeHandle } from 'react'
+import { useStore } from './hooks/useStore'
+import { TransitionGroup, CSSTransition } from 'react-transition-group'
+import styles from './style/Message.module.scss'
+import { useTimer } from './hooks/useTimer'
 export type Position = 'top' | 'bottom'
 
 export interface MessageProps {
@@ -7,26 +12,79 @@ export interface MessageProps {
   className?: string | string[]
   content: ReactNode
   duration?: number
+  onClose?: (...args: any) => void
   id?: number
   postion?: Position
 }
 
-export const MessageProvider: FC<{}> = (props) => {
-  const { messageList, add, update, remove, clearAll } = useStore('top')
+export interface MessageRef {
+  add: (messageProps: MessageProps) => number
+  remove: (id: number) => void
+  update: (id: number, messageProps: MessageProps) => void
+  clearAll: () => void
+}
+
+const MessageItem: FC<MessageProps> = (item) => {
+  const { onClose, id, duration } = item
+  const { onMouseEnter, onMouseLeave } = useTimer({
+    id: id!,
+    duration: duration,
+    remove: onClose!,
+  })
   return (
-    <div>
-      {messageList.top.map((item) => (
-        <div
-          style={{
-            width: 100,
-            lineHeight: '30px',
-            border: '1px solid #000',
-            margin: '20px',
-          }}
-        >
-          {item.content}
-        </div>
-      ))}
+    <div
+      className={styles['message-item']}
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
+    >
+      {item.content}
     </div>
   )
+}
+
+export const MessageProvider: FC<{ ref: Ref<MessageRef> }> = (props) => {
+  const { ref } = props
+  const { messageList, add, update, remove, clearAll } = useStore('top')
+  const positions = Object.keys(messageList)
+  if ('current' in ref!) {
+    ref.current = {
+      add,
+      update,
+      remove,
+      clearAll,
+    }
+  }
+  // useImperativeHandle(ref, () => ({
+  //   add,
+  //   remove,
+  //   update,
+  //   clearAll,
+  // }),[add,remove,update,clearAll])
+  const messageWrapper = (
+    <div className={styles['message-wrapper']}>
+      {positions.map((direction) => {
+        return (
+          <TransitionGroup className={styles[`message-wrapper-${direction}`]}>
+            {messageList[direction].map((item) => (
+              <CSSTransition
+                key={direction}
+                timeout={1000}
+                classNames={styles.message}
+              >
+                <MessageItem {...item} onClose={remove} />
+              </CSSTransition>
+            ))}
+          </TransitionGroup>
+        )
+      })}
+    </div>
+  )
+  const el = useMemo(() => {
+    const el = document.createElement('div')
+    el.className = 'wrapper'
+    document.body.appendChild(el)
+    return el
+  }, [])
+
+  return createPortal(messageWrapper, el)
 }

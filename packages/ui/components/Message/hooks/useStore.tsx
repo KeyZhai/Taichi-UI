@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import type { MessageProps, Position } from '.'
+import type { MessageProps, Position } from '..'
 
 type MessageList = {
   top: MessageProps[]
@@ -35,6 +35,7 @@ export const useStore = (defaultPosition: Position) => {
           [position]: messages,
         }
       })
+      return id
     },
     update(id: number, message: MessageProps) {
       if (!id) return
