@@ -3,6 +3,7 @@ import { useState } from 'react'
 import classnames from 'classnames'
 import { Color } from './Color'
 import type { ColorType } from './interface'
+import { Palette } from './components/Palette'
 export interface ColorPickerProps {
   style?: CSSProperties
   className?: string
@@ -21,7 +22,7 @@ export const ColorPicker: FC<ColorPickerProps> = (props) => {
   })
   return (
     <div className={cs} style={style}>
-      <Palette color={colorValue}></Palette>
+      <Palette color={colorValue} />
     </div>
   )
 }
